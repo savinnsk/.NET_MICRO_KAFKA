@@ -9,7 +9,7 @@ namespace Post.Common.Events
         public DateTime DatePosted { get; set; }
 
         //nameof to pass the name of the event to base
-        public PostCreatedEvent(string type) : base(nameof(PostCreatedEvent))
+        public PostCreatedEvent() : base(nameof(PostCreatedEvent))
         {
         }
     }

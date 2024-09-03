@@ -7,10 +7,10 @@ public abstract class BaseEvent : Message
 
     protected BaseEvent(string type)
     {
-       this.Type = type;
+       Type = type;
     }
 
     public int Version { get; set; }
-    public required string Type { get; set; }
+    public string Type { get; set; }
 
 }

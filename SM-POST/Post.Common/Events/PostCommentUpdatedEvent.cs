@@ -9,7 +9,7 @@ namespace Post.Common.Events
         public string Comment { get; set; }
         public DateTime DateEdited { get; set; }
 
-        public PostCommentUpdatedEvent(string type) : base(nameof(PostCommentUpdatedEvent))
+        public PostCommentUpdatedEvent() : base(nameof(PostCommentUpdatedEvent))
         {
         }
     }

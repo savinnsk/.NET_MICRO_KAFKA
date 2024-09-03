@@ -4,12 +4,12 @@ namespace Post.Common.Events
 {
     public class PostCommentAddedEvent : BaseEvent
     {
-        public Guid CommentId { get; set; }
-        public string Comment { get; set; }
-        public string Username { get; set; }
-        public DateTime CommentDate { get; set; }
+        public required Guid CommentId { get; set; }
+        public required string Comment { get; set; }
+        public required string Username { get; set; }
+        public required DateTime CommentDate { get; set; }
 
-        public PostCommentAddedEvent(string type) : base(nameof(PostLikedEvent))
+        public PostCommentAddedEvent() : base(nameof(PostLikedEvent))
         {
         }
     }
