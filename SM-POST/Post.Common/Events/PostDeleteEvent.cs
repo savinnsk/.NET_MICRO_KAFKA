@@ -6,7 +6,7 @@ namespace Post.Common.Events
     {
         public Guid CommentId { get; set; }
 
-        public  PostDeleteEvent (string type) : base(nameof(PostDeleteEvent))
+        public  PostDeleteEvent () : base(nameof(PostDeleteEvent))
         {
         }
     }

@@ -6,7 +6,7 @@ namespace Post.Common.Events
     {
         public Guid CommentId { get; set; }
 
-        public  PostRemoveCommentEvent (string type) : base(nameof(PostRemoveCommentEvent))
+        public  PostRemoveCommentEvent () : base(nameof(PostRemoveCommentEvent))
         {
         }
     }
