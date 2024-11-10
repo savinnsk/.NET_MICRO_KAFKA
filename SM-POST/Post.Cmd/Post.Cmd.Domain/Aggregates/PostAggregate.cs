@@ -7,7 +7,7 @@ namespace Post.Cmd.Domain.Aggregates
     public class PostAggregate : AgregateRoot
     {
         private bool _active;
-        private string _author;
+        public required string _author;
         private readonly Dictionary<Guid, Tuple<string, string>> _comments = new();
 
         public bool Active
