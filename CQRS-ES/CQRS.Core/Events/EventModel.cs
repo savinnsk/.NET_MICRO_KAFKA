@@ -7,7 +7,7 @@ namespace CQRS.Core.Events
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public required string Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
