@@ -1,6 +1,8 @@
 using CQRS.Core.Domain;
+using CQRS.Core.Infrastructure;
 using Post.Cmd.Infrastruture.Config;
 using Post.Cmd.Infrastruture.Repositories;
+using Post.Cmd.Infrastruture.Stores;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection(nameof(MongoDbConfig)));
 builder.Services.AddScoped<IEventStoreRepository, EventStoreRepository>();
+builder.Services.AddScoped<IEventStore,EventStore>();
 
 var app = builder.Build();
 
