@@ -1,5 +1,6 @@
+using CQRS.Core.Command;
 
-namespace CQRS.Core.Commands
+namespace Post.Cmd.Api.Commands 
 {
     public class EditPostCommentCommand : BaseCommand
     {

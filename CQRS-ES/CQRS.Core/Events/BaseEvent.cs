@@ -2,7 +2,7 @@
 
 namespace CQRS.Core.Events;
 
-public abstract class BaseEvent : Message
+public abstract class BaseEvent : Messages.Message
 {
 
     protected BaseEvent(string type)

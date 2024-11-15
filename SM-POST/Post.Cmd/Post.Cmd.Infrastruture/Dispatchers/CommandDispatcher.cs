@@ -1,5 +1,5 @@
 ﻿
-using CQRS.Core.Commands;
+using CQRS.Core.Command;
 using CQRS.Core.Infrastructure;
 
 namespace Post.Cmd.Infrastruture.Dispatchers
