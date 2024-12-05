@@ -3,6 +3,7 @@ using CQRS.Core.Domain;
 using CQRS.Core.Events;
 using CQRS.Core.Infrastructure;
 using CQRS.Core.Exceptions;
+using CQRS.Core.Producers;
 using Post.Cmd.Domain.Aggregates;
 namespace Post.Cmd.Infrastruture.Stores
 {
@@ -10,10 +11,10 @@ namespace Post.Cmd.Infrastruture.Stores
     {
 
         private readonly IEventStoreRepository _eventStoreRepository;
-
-        public EventStore(IEventStoreRepository eventStoreRepository) {
-        
+        private readonly IEventProducer _eventProducer;
+        public EventStore(IEventStoreRepository eventStoreRepository,IEventProducer eventProducer) {
             _eventStoreRepository = eventStoreRepository;
+            _eventProducer = eventProducer;
         }
 
         public async Task<List<BaseEvent>> GetEventsAsync(Guid aggregateId)
@@ -54,6 +55,9 @@ namespace Post.Cmd.Infrastruture.Stores
                 };
 
                 await _eventStoreRepository.SaveAsync(eventModel);
+
+                var topic = "SocialMediaPostEvent"; //Environment.GetEnvironmentVariable("KAFKA_TOPIC");
+                await _eventProducer.ProducerAsync(topic, @event);
 
             }
                 

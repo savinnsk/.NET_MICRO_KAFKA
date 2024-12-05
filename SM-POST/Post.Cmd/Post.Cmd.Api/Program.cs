@@ -2,11 +2,13 @@ using Confluent.Kafka;
 using CQRS.Core.Domain;
 using CQRS.Core.Handlers;
 using CQRS.Core.Infrastructure;
+using CQRS.Core.Producers;
 using Post.Cmd.Api.Commands;
 using Post.Cmd.Domain.Aggregates;
 using Post.Cmd.Infrastruture.Config;
 using Post.Cmd.Infrastruture.Dispatchers;
 using Post.Cmd.Infrastruture.Handlers;
+using Post.Cmd.Infrastruture.Producers;
 using Post.Cmd.Infrastruture.Repositories;
 using Post.Cmd.Infrastruture.Stores;
 
@@ -25,8 +27,8 @@ builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection(name
 builder.Services.AddScoped<IEventStoreRepository, EventStoreRepository>();
 builder.Services.AddScoped<IEventStore,EventStore>();
 builder.Services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
+builder.Services.AddScoped<IEventProducer, EventProducer>();
 builder.Services.AddScoped<ICommandHandler, CommandHandler>();
-
 
 // dependency injection to commands
 var dispatcher = new CommandDispatcher();
