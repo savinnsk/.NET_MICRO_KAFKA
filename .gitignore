@@ -2,3 +2,9 @@
 **/cache
 **/bin
 **/.vs
+SocialMedia
+test
+
+
+# PRODUCTION
+# **/appsettings.json
