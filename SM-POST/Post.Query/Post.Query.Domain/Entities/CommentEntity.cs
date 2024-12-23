@@ -8,19 +8,19 @@ namespace Post.Query.Domain;
 public class CommentEntity
 {
     [Key]
-    public Guid ComemmentId { get; set; }
+    public required Guid ComemmentId { get; set; }
     
-    public Guid PostId { get; set; }
+    public required Guid PostId { get; set; }
     
-    public string Username { get; set; }
+    public required string Username { get; set; }
     
-    public string Comment { get; set; }
+    public required string Comment { get; set; }
     
-    public bool Edited { get; set; }
+    public required bool Edited { get; set; }
     
-    public DateTime DateCreated { get; set; }
+    public required DateTime DateCreated { get; set; }
     
-    public DateTime CommentDate { get; set; }
+    public required DateTime CommentDate { get; set; }
     
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual PostEntity Post { get; set; }

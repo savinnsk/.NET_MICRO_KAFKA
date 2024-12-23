@@ -51,14 +51,14 @@ namespace Post.Cmd.Domain.Aggregates
                 throw new InvalidOperationException($"The value of {nameof(message)} cannot be null or empty. Please provide a valid {nameof(message)}");
             }
 
-            RaiseEvent(new MessageUpdatedEvent
+            RaiseEvent(new PostMessageUpdatedEvent
             {
                 Id = _id,
                 Message = message
             });
         }
 
-        public void Apply(MessageUpdatedEvent @event) {
+        public void Apply(PostMessageUpdatedEvent @event) {
             _id = @event.Id;
 
         }
@@ -90,7 +90,7 @@ namespace Post.Cmd.Domain.Aggregates
                 throw new InvalidOperationException($"THe value of {nameof(comment)} cannot be null or empty. Please provide a valid {nameof(comment)}!");
             }
 
-            RaiseEvent(new PostCommentAddedEvent { 
+            RaiseEvent(new CommentAddedEvent { 
                 Id = _id, 
                 Username = username,
                 Comment = comment,
@@ -99,7 +99,7 @@ namespace Post.Cmd.Domain.Aggregates
             });
         }
 
-        public void Apply(PostCommentAddedEvent @event) 
+        public void Apply(CommentAddedEvent @event) 
         {
             _id = @event.Id;
             _comments.Add(@event.CommentId, new Tuple<string, string>(@event.Comment, @event.Username));
@@ -118,7 +118,7 @@ namespace Post.Cmd.Domain.Aggregates
             };
 
 
-            RaiseEvent(new PostCommentUpdatedEvent {
+            RaiseEvent(new CommentUpdatedEvent {
                 Id= _id,
                 CommentId= commentId,
                 Username= username,
@@ -127,7 +127,7 @@ namespace Post.Cmd.Domain.Aggregates
             });
         }
 
-        public void Apply(PostCommentUpdatedEvent @event)
+        public void Apply(CommentUpdatedEvent @event)
         {
             _id = @event.Id;
             _comments[@event.CommentId] = new Tuple<string, string>(@event.Comment,@event.Username);
@@ -149,7 +149,7 @@ namespace Post.Cmd.Domain.Aggregates
 
 
 
-            RaiseEvent(new PostRemoveCommentEvent
+            RaiseEvent(new CommentRemoveEvent
             {
                 Id = _id,
                 CommentId = commentId
@@ -160,7 +160,7 @@ namespace Post.Cmd.Domain.Aggregates
         }
 
 
-        public void Apply(PostRemoveCommentEvent @event) {
+        public void Apply(CommentRemoveEvent @event) {
             _id = @event.Id;
             _comments.Remove(@event.CommentId); 
         }

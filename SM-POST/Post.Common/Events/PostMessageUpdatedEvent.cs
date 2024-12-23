@@ -2,11 +2,11 @@
 
 namespace Message.Common.Events
 {
-    public class MessageUpdatedEvent : BaseEvent
+    public class PostMessageUpdatedEvent : BaseEvent
     {
 
         public string Message { get; set; }
-        public MessageUpdatedEvent() : base(nameof(MessageUpdatedEvent))
+        public PostMessageUpdatedEvent() : base(nameof(PostMessageUpdatedEvent))
         {
         }
     }

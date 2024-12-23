@@ -1,5 +1,9 @@
-using Microsoft.EntityFrameworkCore;  
-using Post.Query.Infrastruture.DataAccess; 
+using Microsoft.EntityFrameworkCore;
+using Post.Query.Domain.Repositories;
+using Post.Query.Infrastruture.DataAccess;
+using Post.Query.Infrastruture.Handlers;
+using Post.Query.Infrastruture.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);  // Creates a builder to configure the web application, passing command-line arguments
 
@@ -15,6 +19,11 @@ builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory
 // Retrieves an instance of DatabaseContext from the DI container, allowing direct database access
 var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<DatabaseContext>();
 dataContext.Database.EnsureCreated();
+
+
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IEventHandler, Post.Query.Infrastruture.Handlers.EventHandler>();
 
 builder.Services.AddControllers();
 
