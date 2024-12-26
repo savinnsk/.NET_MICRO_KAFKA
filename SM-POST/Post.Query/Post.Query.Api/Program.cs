@@ -1,5 +1,8 @@
+using Confluent.Kafka;
+using CQRS.Core.Consumers;
 using Microsoft.EntityFrameworkCore;
 using Post.Query.Domain.Repositories;
+using Post.Query.Infrastruture.Consumers;
 using Post.Query.Infrastruture.DataAccess;
 using Post.Query.Infrastruture.Handlers;
 using Post.Query.Infrastruture.Repositories;
@@ -9,21 +12,22 @@ var builder = WebApplication.CreateBuilder(args);  // Creates a builder to confi
 
 // Defines the DbContext configuration, using Lazy Loading and setting up the connection to SQL Server
 Action<DbContextOptionsBuilder> configureDbContext = o => o.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
-
 // Registers the DatabaseContext in the dependency injection (DI) container with the DbContext configuration
 builder.Services.AddDbContext<DatabaseContext>(configureDbContext);
-
 // Registers the DatabaseContextFactory as a singleton, allowing the creation of DatabaseContext instances based on the configuration
 builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configureDbContext));
-
 // Retrieves an instance of DatabaseContext from the DI container, allowing direct database access
 var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<DatabaseContext>();
 dataContext.Database.EnsureCreated();
+
+// config env app.settings
+builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig))); 
 
 
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IEventHandler, Post.Query.Infrastruture.Handlers.EventHandler>();
+builder.Services.AddScoped<IEventConsumer, EventConsumer>();
 
 builder.Services.AddControllers();
 
