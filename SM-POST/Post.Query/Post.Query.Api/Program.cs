@@ -30,6 +30,7 @@ builder.Services.AddScoped<IEventHandler, Post.Query.Infrastruture.Handlers.Even
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
 
 builder.Services.AddControllers();
+builder.Services.AddHostedService<ConsmerHostedService>();
 
 builder.Services.AddEndpointsApiExplorer();
 
